@@ -70,5 +70,8 @@ public class Student {
     public void setNum_of_remaining_courses(int num_of_remaining_courses) {
         this.num_of_remaining_courses = num_of_remaining_courses;
     }
+    public String yespls(){
+        return "hi";
+    }
 
 }

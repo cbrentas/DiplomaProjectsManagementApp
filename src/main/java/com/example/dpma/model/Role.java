@@ -1,8 +1,8 @@
 package com.example.dpma.model;
 
 public enum Role {
-    USER("User"),
-    ADMIN("Admin");
+    STUDENT("Student"),
+    PROFESSOR("Professor");
 
     private final String value;
 

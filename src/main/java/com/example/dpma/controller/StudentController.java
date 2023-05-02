@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class UserController {
+public class StudentController {
 
-    @RequestMapping("/user/dashboard")
-    public String getUserHome(){
+    @RequestMapping("/student/dashboard")
+    public String getStudentHome(){
 //    	 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 //		 String currentPrincipalName = authentication.getName();
 //		 System.err.println(currentPrincipalName);
 
-        return "user/dashboard";
+        return "student/dashboard";
     }
 }

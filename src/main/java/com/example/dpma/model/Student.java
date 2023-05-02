@@ -9,13 +9,20 @@ import jakarta.persistence.Table;
 @Table(name="student")
 public class Student {
 
+    public Student(int student_id, String full_name, int year_of_studies, float curr_average_grade, int num_of_remaining_courses) {
+        this.student_id = student_id;
+        this.full_name = full_name;
+        this.year_of_studies = year_of_studies;
+        this.curr_average_grade = curr_average_grade;
+        this.num_of_remaining_courses = num_of_remaining_courses;
+    }
+    public Student(){
+
+    }
+
     @Id
     @Column(name="student_id")
     private int student_id;
-
-
-
-
 
     ///////////////////////
     @Column(name="full_name")
@@ -70,8 +77,15 @@ public class Student {
     public void setNum_of_remaining_courses(int num_of_remaining_courses) {
         this.num_of_remaining_courses = num_of_remaining_courses;
     }
-    public String yespls(){
-        return "hi";
-    }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "student_id=" + student_id +
+                ", full_name='" + full_name + '\'' +
+                ", year_of_studies=" + year_of_studies +
+                ", curr_average_grade=" + curr_average_grade +
+                ", num_of_remaining_courses=" + num_of_remaining_courses +
+                '}';
+    }
 }

@@ -1,13 +1,32 @@
 package com.example.dpma.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name="student")
+@Table(name = "student")
 public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "student_id")
+    private int student_id;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
+
+    ///////////////////////
+    @Column(name = "full_name")
+    private String full_name;
+
+    @Column(name = "year_of_studies")
+    private int year_of_studies;
+
+    @Column(name = "curr_average_grade")
+    private float curr_average_grade;
+
+    @Column(name = "num_of_remaining_courses")
+    private int num_of_remaining_courses;
 
     public Student(int student_id, String full_name, int year_of_studies, float curr_average_grade, int num_of_remaining_courses) {
         this.student_id = student_id;
@@ -16,29 +35,29 @@ public class Student {
         this.curr_average_grade = curr_average_grade;
         this.num_of_remaining_courses = num_of_remaining_courses;
     }
-    public Student(){
+
+    public Student() {
 
     }
 
-    @Id
-    @Column(name="student_id")
-    private int student_id;
-
-    ///////////////////////
-    @Column(name="full_name")
-    private String full_name;
-
-    @Column(name="year_of_studies")
-    private int year_of_studies;
-
-    @Column(name="curr_average_grade")
-    private float curr_average_grade;
-
-    @Column(name="num_of_remaining_courses")
-    private int num_of_remaining_courses;
-
     public int getId() {
         return student_id;
+    }
+
+    public int getStudent_id() {
+        return student_id;
+    }
+
+    public void setStudent_id(int student_id) {
+        this.student_id = student_id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getFull_name() {
@@ -62,6 +81,7 @@ public class Student {
     public void setId(int id) {
         this.student_id = id;
     }
+
     public void setFull_name(String full_name) {
         this.full_name = full_name;
     }

@@ -1,4 +1,5 @@
 package com.example.dpma.model;
+
 import java.util.Collection;
 import java.util.Collections;
 
@@ -8,22 +9,23 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-@Table(name="users")
-public class User implements UserDetails{
+@Table(name = "users")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private int id;
 
-    @Column(name="user_name", unique=true)
+
+    @Column(name = "user_name", unique = true)
     private String username;
 
-    @Column(name="password")
+    @Column(name = "password")
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(name="role")
+    @Column(name = "role")
     private Role role;
 
     @Override
@@ -86,4 +88,6 @@ public class User implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
+
 }

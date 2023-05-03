@@ -3,6 +3,8 @@ package com.example.dpma.service;
 import java.util.Optional;
 
 import com.example.dpma.dao.UserDAO;
+import com.example.dpma.model.Role;
+import com.example.dpma.model.Student;
 import com.example.dpma.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,11 +22,21 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserDAO userDAO;
 
+    @Autowired
+    StudentService studentService;
+
     @Override
     public void saveUser(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
         user.setPassword(encodedPassword);
         userDAO.save(user);
+
+        if (user.getRole().equals(Role.STUDENT)) {
+            Student student = new Student();
+            student.setUser(user);
+            studentService.saveProfile(student);
+        }
+
     }
 
     @Override

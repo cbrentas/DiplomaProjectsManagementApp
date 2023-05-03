@@ -6,14 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class StudentServiceImpl implements StudentService{
+public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentDAO studentDAO;
 
     @Override
-    public void saveProfile(Student student){
+    public void saveProfile(Student student) {
+
         studentDAO.save(student);
     }
-
 }
+
+

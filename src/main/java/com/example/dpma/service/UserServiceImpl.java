@@ -3,6 +3,7 @@ package com.example.dpma.service;
 import java.util.Optional;
 
 import com.example.dpma.dao.UserDAO;
+import com.example.dpma.model.Professor;
 import com.example.dpma.model.Role;
 import com.example.dpma.model.Student;
 import com.example.dpma.model.User;
@@ -25,6 +26,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     StudentService studentService;
 
+    @Autowired
+    ProfessorService professorService;
+
     @Override
     public void saveUser(User user) {
         String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
@@ -35,6 +39,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             Student student = new Student();
             student.setUser(user);
             studentService.saveProfile(student);
+        } else if (user.getRole().equals(Role.PROFESSOR)) {
+            Professor professor = new Professor();
+            professor.setUser(user);
+            professorService.saveProfile(professor);
         }
 
     }
@@ -48,8 +56,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userDAO.findByUsername(username).orElseThrow(
-                ()-> new UsernameNotFoundException(
+                () -> new UsernameNotFoundException(
                         String.format("USER_NOT_FOUND", username)
                 ));
+    }
+
+    @Override
+    public User loadUserByName(String name) {
+        return userDAO.findUserByUsername(name);
     }
 }

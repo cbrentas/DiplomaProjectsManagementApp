@@ -7,5 +7,9 @@ import org.springframework.stereotype.Service;
 public interface StudentService {
     public void saveProfile(Student student);
 
+    public Student findStudentByUserId(int userId);
+
+
+
 
 }

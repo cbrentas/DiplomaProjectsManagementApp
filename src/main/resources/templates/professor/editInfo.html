@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Register</title>
+</head>
+
+
+<body>
+
+<div class="container">
+    <form
+            action="#" th:action="@{/professor/save}" th:object="${professor}" method="post">
+        <h3>Save information</h3>
+        <input type="hidden" th:field="*{professor_id}"/>
+        <input type="hidden" th:field="*{user}"/>
+        <input type="text" th:field="*{full_name}" placeholder="Full Name" /> <br/><br/>
+        <input type="text" th:field="*{specialty}" placeholder="specialty" /> <br/><br/>
+
+
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+</body>
+</html>

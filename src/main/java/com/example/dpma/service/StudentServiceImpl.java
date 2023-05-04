@@ -16,6 +16,11 @@ public class StudentServiceImpl implements StudentService {
 
         studentDAO.save(student);
     }
+
+    @Override
+    public Student findStudentByUserId(int userId) {
+        return studentDAO.findByUserId(userId);
+    }
 }
 
 

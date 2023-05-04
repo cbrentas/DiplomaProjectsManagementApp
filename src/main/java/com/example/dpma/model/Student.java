@@ -102,6 +102,7 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "student_id=" + student_id +
+                ", user=" + user +
                 ", full_name='" + full_name + '\'' +
                 ", year_of_studies=" + year_of_studies +
                 ", curr_average_grade=" + curr_average_grade +

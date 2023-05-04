@@ -1,5 +1,6 @@
 package com.example.dpma.controller;
 
+import com.example.dpma.dao.StudentDAO;
 import com.example.dpma.dao.UserDAO;
 import com.example.dpma.model.Student;
 import com.example.dpma.model.User;
@@ -24,7 +25,7 @@ public class StudentController {
     StudentService studentService;
 
     @Autowired
-    UserDAO userDAO;
+    UserServiceImpl userService;
 
     @RequestMapping("/student/dashboard")
     public String getStudentHome() {
@@ -35,21 +36,20 @@ public class StudentController {
         return "student/dashboard";
     }
 
-    @PostMapping("/students/editStudentInfo")
+    @RequestMapping("/student/editStudentInfo")
     public String updateStudent(Model model, HttpServletRequest request) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String currentPrincipalName = auth.getName();
-        Optional<User> currUser = userDAO.findByUsername(currentPrincipalName);
-
-        model.addAttribute("student");
+        User user = userService.loadUserByName(currentPrincipalName);
+        Student student = studentService.findStudentByUserId(user.getId());
+        model.addAttribute("student", student);
         return "student/editInfo";
     }
 
 
     @RequestMapping("/student/save")
     public String studentSave(@ModelAttribute("student") Student student, Model model) {
-
         studentService.saveProfile(student);
         return "student/dashboard";
     }

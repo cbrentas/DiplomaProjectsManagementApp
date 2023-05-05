@@ -2,6 +2,8 @@ package com.example.dpma.model;
 
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name = "professor")
 public class Professor {
@@ -20,6 +22,10 @@ public class Professor {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
+
+    @OneToMany(mappedBy = "professor")
+    private Set<Subject> subjects;
+
 
     public Professor(int professor_id, String full_name, String specialty, User user) {
         this.professor_id = professor_id;

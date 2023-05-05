@@ -2,8 +2,10 @@ package com.example.dpma.controller;
 
 import com.example.dpma.model.Professor;
 import com.example.dpma.model.Student;
+import com.example.dpma.model.Subject;
 import com.example.dpma.model.User;
 import com.example.dpma.service.ProfessorService;
+import com.example.dpma.service.SubjectService;
 import com.example.dpma.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,10 @@ public class ProfessorController {
 
     @Autowired
     ProfessorService professorService;
+
+    @Autowired
+    SubjectService subjectService;
+
 
     @RequestMapping("/professor/dashboard")
     public String getProfessorHome() {
@@ -44,5 +50,35 @@ public class ProfessorController {
     public String studentSave(@ModelAttribute("professor") Professor professor, Model model) {
         professorService.saveProfile(professor);
         return "professor/dashboard";
+    }
+
+
+    @RequestMapping("/professor/showSubjectForm")
+    public String showSubjectForm(Model model){
+
+       Subject subject = new Subject();
+
+        model.addAttribute("subject", subject);
+        return "/professor/subjectForm";
+
+    }
+
+
+
+    //Add information for completed
+    @RequestMapping("/professor/addSubject")
+    public String addSubject(@ModelAttribute("subject") Subject subject, Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+
+        professorService.saveSubject(currentPrincipalName, subject);
+        model.addAttribute("successMessage", "Subject registered successfully!");
+
+
+
+
+        return "/professor/dashboard";
+
     }
 }

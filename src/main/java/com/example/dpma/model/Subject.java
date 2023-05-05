@@ -15,7 +15,7 @@ public class Subject {
     @Column(name = "subject_name")
     private String subject_name;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "supervisor", referencedColumnName = "professor_id")
     private Professor professor;
 

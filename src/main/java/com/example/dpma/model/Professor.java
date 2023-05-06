@@ -2,6 +2,7 @@ package com.example.dpma.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,7 +25,7 @@ public class Professor {
     private User user;
 
     @OneToMany(mappedBy = "professor")
-    private Set<Subject> subjects;
+    private List<Subject> subjects;
 
 
     public Professor(int professor_id, String full_name, String specialty, User user) {
@@ -35,6 +36,11 @@ public class Professor {
     }
 
     public Professor() {
+    }
+
+    public void addSubject(Subject subject){
+        subjects.add(subject);
+
     }
 
 
@@ -52,6 +58,14 @@ public class Professor {
 
     public void setFull_name(String full_name) {
         this.full_name = full_name;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public String getSpecialty() {

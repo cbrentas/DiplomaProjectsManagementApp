@@ -11,6 +11,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class ProfessorServiceImpl implements ProfessorService {
@@ -18,14 +20,8 @@ public class ProfessorServiceImpl implements ProfessorService {
     @Autowired
     ProfessorDAO professorDAO;
 
-    @Autowired
-    UserService userService;
 
-    @Autowired
-    ProfessorService professorService;
 
-    @Autowired
-    SubjectDAO subjectDAO;
 
     @Override
     public void saveProfile(Professor professor) {
@@ -35,16 +31,24 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Override
     public Professor findProfessorByUserId(int userId) {
+
         return professorDAO.findByUserId(userId);
     }
 
     @Override
-    public void saveSubject(String username, Subject subject){
+    public void saveSubject(Professor professor,Subject subject){
 
-        User user = userService.loadUserByName(username);
-        Professor professor = professorService.findProfessorByUserId(user.getId());
-        subject.setProfessor(professor);
-        subjectDAO.save(subject);
+        professor.addSubject(subject);
+
+
 
     }
+
+    @Override
+    public List<Subject> listProfessorSubjects(Professor professor) {
+
+        return professor.getSubjects();
+    }
+
+
 }

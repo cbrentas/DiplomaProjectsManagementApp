@@ -28,10 +28,12 @@ public class StudentController {
     UserServiceImpl userService;
 
     @RequestMapping("/student/dashboard")
-    public String getStudentHome() {
-//    	 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//		 String currentPrincipalName = authentication.getName();
-//		 System.err.println(currentPrincipalName);
+    public String getStudentHome(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.err.println(currentPrincipalName);
+        model.addAttribute("username",currentPrincipalName);
+        model.addAttribute("role","STUDENT");
 
         return "student/dashboard";
     }
@@ -52,5 +54,18 @@ public class StudentController {
     public String studentSave(@ModelAttribute("student") Student student, Model model) {
         studentService.saveProfile(student);
         return "student/dashboard";
+    }
+
+    @RequestMapping("/student/showAllSubjects")
+    public String studentShowAllSubjects(Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Student student = studentService.findStudentByUserId(user.getId());
+        model.addAttribute("subjects",studentService.listStudentSubjects());
+
+
+        return "/student/subjectsList";
     }
 }

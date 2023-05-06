@@ -16,6 +16,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 public class ProfessorController {
 
@@ -30,7 +32,13 @@ public class ProfessorController {
 
 
     @RequestMapping("/professor/dashboard")
-    public String getProfessorHome() {
+    public String getProfessorHome(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.err.println(currentPrincipalName);
+        model.addAttribute("username",currentPrincipalName);
+        model.addAttribute("role","PROFESSOR");
+
         return "professor/dashboard";
     }
 
@@ -71,8 +79,11 @@ public class ProfessorController {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
-
-        professorService.saveSubject(currentPrincipalName, subject);
+        User user = userService.loadUserByName(currentPrincipalName);
+        Professor professor = professorService.findProfessorByUserId(user.getId());
+        subject.setProfessor(professor);
+        subjectService.saveSubject(subject);
+        professorService.saveSubject(professor,subject);
         model.addAttribute("successMessage", "Subject registered successfully!");
 
 
@@ -80,5 +91,17 @@ public class ProfessorController {
 
         return "/professor/dashboard";
 
+    }
+
+    @RequestMapping("/professor/subjectsList")
+    public String listProfessorSubjects(Model model){
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Professor professor = professorService.findProfessorByUserId(user.getId());
+        model.addAttribute("subjects",professorService.listProfessorSubjects(professor));
+
+        return "professor/subjectsList";
     }
 }

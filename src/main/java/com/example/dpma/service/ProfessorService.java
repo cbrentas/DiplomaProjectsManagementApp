@@ -5,6 +5,8 @@ import com.example.dpma.model.Student;
 import com.example.dpma.model.Subject;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public interface ProfessorService {
 
@@ -12,5 +14,7 @@ public interface ProfessorService {
 
     public Professor findProfessorByUserId(int userId);
 
-    public void saveSubject(String username, Subject subject);
+    public void saveSubject(Professor professor,Subject subject);
+
+    public List<Subject> listProfessorSubjects(Professor professor);
 }

@@ -8,6 +8,21 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
+  <!-- Custom CSS -->
+  <style>
+    .btn-custom {
+      background-color: #28a745;
+      color: white;
+      border-radius: 5px;
+      margin-right: 10px;
+    }
+
+    .btn-custom:hover {
+      background-color: #218838;
+      color: white;
+    }
+  </style>
+
   <title>Professor Dashboard</title>
 </head>
 
@@ -20,8 +35,8 @@
 
   <br> <br> <hr> <br> <br>
 
-  <h4>Logged as: <span sec:authentication="name"></span></h4>
-  <h4>Has role: <span sec:authentication="authorities"></span></h4>
+  <h4>Logged as: <span th:text ="${username}"></span></h4>
+  <h4>Has role: <span th:text ="${role}"></span></h4>
 
   <br> <br> <hr> <br> <br>
 
@@ -29,7 +44,8 @@
     <a th:href="@{/}" class="btn btn-primary btn-sm mb-3">Home</a>
     <a th:href="@{/professor/editProfessorInfo}" class="btn btn-warning btn-sm mb-3">Edit Profile</a>
     <a th:href="@{/logout}" class="btn btn-danger btn-sm mb-3">Logout</a>
-    <a th:href="@{/professor/showSubjectForm}" class="btn btn-success btn-sm mb-3">Add Subject</a>
+    <a th:href="@{/professor/showSubjectForm}" class="btn btn-custom btn-sm mb-3">Add Subject</a>
+    <a th:href="@{/professor/subjectsList}" class="btn btn-custom btn-sm mb-3">Subject List</a>
   </p>
 
 </div>

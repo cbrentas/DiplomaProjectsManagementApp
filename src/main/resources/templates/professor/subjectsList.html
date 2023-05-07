@@ -11,6 +11,25 @@
           integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
     <title>Subject List</title>
+
+    <style>
+        .btn-secondary {
+            background-color: darkred;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: darkblue;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .btn-secondary:hover {
+            background-color: #381616;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+    </style>
 </head>
 
 
@@ -24,6 +43,7 @@
             <th>Subject Name</th>
             <th>Objective</th>
             <th>Semester</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -32,9 +52,18 @@
             <td th:text="${subject.subject_name}"></td>
             <td th:text="${subject.objective}"></td>
             <td th:text="${subject.semester}"></td>
+            <td>
+                <form th:action="@{/student/subjectsList}" method="post">
+                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
+                    <button type="submit" class="btn btn-primary">Delete</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
+    <div>
+    <a href="/professor/dashboard" class="btn btn-secondary float-right mb-3"  role="button">Professor Dashboard</a>
+    </div>
 </div>
 
 </body>

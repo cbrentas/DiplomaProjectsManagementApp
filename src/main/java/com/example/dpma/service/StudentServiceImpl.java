@@ -1,7 +1,9 @@
 package com.example.dpma.service;
 
+import com.example.dpma.dao.ApplicationDAO;
 import com.example.dpma.dao.StudentDAO;
 import com.example.dpma.dao.SubjectDAO;
+import com.example.dpma.model.Application;
 import com.example.dpma.model.Student;
 import com.example.dpma.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class StudentServiceImpl implements StudentService {
     @Autowired
     private SubjectDAO subjectDAO;
 
+    @Autowired
+    private ApplicationDAO applicationDAO;
+
     @Override
     public void saveProfile(Student student) {
 
@@ -32,6 +37,18 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Subject> listStudentSubjects() {
         return subjectDAO.findAll();
+    }
+
+    @Override
+    public void applyToSubject(Student student, Subject subject) {
+
+        Application application = new Application();
+        application.setStudent(student);
+        application.setSubject(subject);
+        applicationDAO.save(application);
+        student.setApplication(application);
+
+
     }
 }
 

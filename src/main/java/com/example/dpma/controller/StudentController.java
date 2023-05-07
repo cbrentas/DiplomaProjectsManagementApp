@@ -3,6 +3,7 @@ package com.example.dpma.controller;
 import com.example.dpma.dao.StudentDAO;
 import com.example.dpma.dao.UserDAO;
 import com.example.dpma.model.Student;
+import com.example.dpma.model.Subject;
 import com.example.dpma.model.User;
 import com.example.dpma.service.StudentService;
 import com.example.dpma.service.UserService;
@@ -67,5 +68,21 @@ public class StudentController {
 
 
         return "/student/subjectsList";
+    }
+
+
+    @RequestMapping("/student/ApplicationCreate")
+    public String applyToSubject(@ModelAttribute(name = "subject") Subject subject, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Student student = studentService.findStudentByUserId(user.getId());
+        studentService.applyToSubject(student,subject);
+
+
+
+
+
+        return "/student/myApplication";
     }
 }

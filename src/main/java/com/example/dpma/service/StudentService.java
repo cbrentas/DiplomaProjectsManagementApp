@@ -14,5 +14,7 @@ public interface StudentService {
 
     public List<Subject> listStudentSubjects();
 
+    public void applyToSubject(Student student,Subject subject);
+
 
 }

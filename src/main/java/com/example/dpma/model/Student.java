@@ -28,6 +28,9 @@ public class Student {
     @Column(name = "num_of_remaining_courses")
     private int num_of_remaining_courses;
 
+    @OneToOne(mappedBy = "student")
+    private Application application;
+
     public Student(int student_id, String full_name, int year_of_studies, float curr_average_grade, int num_of_remaining_courses) {
         this.student_id = student_id;
         this.full_name = full_name;
@@ -76,6 +79,14 @@ public class Student {
         return num_of_remaining_courses;
     }
 
+    public Application getApplication() {
+        return application;
+    }
+
+    public void setApplication(Application application) {
+        this.application = application;
+    }
+
     //Setters
 
     public void setId(int id) {
@@ -97,6 +108,7 @@ public class Student {
     public void setNum_of_remaining_courses(int num_of_remaining_courses) {
         this.num_of_remaining_courses = num_of_remaining_courses;
     }
+
 
     @Override
     public String toString() {

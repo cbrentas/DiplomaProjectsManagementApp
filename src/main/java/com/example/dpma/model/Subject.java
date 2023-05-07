@@ -3,13 +3,15 @@ package com.example.dpma.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "subject")
 public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column (name = "subject_id")
+    @Column(name = "subject_id")
     private int subject_id;
 
     @Column(name = "subject_name")
@@ -25,9 +27,8 @@ public class Subject {
     @Column(name = "semester")
     private int semester;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "application_id", referencedColumnName = "application_id")
-    private Application application;
+    @OneToMany(mappedBy = "subject")
+    private List<Application> application;
     //
 
     public int getSubject_id() {
@@ -70,11 +71,11 @@ public class Subject {
         this.semester = semester;
     }
 
-    public Application getApplication() {
+    public List<Application> getApplication() {
         return application;
     }
 
-    public void setApplication(Application application) {
+    public void setApplication(List<Application> application) {
         this.application = application;
     }
 }

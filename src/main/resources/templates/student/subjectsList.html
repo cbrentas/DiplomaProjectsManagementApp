@@ -25,6 +25,7 @@
             <th>Objective</th>
             <th>Semester</th>
             <th>Supervisor</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
@@ -34,6 +35,12 @@
             <td th:text="${subject.objective}"></td>
             <td th:text="${subject.semester}"></td>
             <td th:text="${subject.getProfessor().getFull_name()}"></td>
+            <td>
+                <form th:action="@{/student/ApplicationCreate}" method="post">
+                    <input type="hidden" th:value="${subject.subject_id}"/>
+                    <button type="submit" class="btn btn-primary">Apply</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

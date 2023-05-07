@@ -15,7 +15,7 @@ public class Application {
     @JoinColumn(name = "subject_id", referencedColumnName = "subject_id")
     private Subject subject;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "student_id", referencedColumnName = "student_id")
     private Student student;
 

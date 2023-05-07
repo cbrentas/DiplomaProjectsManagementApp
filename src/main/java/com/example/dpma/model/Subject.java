@@ -71,15 +71,16 @@ public class Subject {
         this.semester = semester;
     }
 
-    public List<Application> getApplication() {
-        return applications;
-    }
 
-    public void setApplication(List<Application> application) {
+    public void setApplications(List<Application> application) {
         this.applications = application;
     }
 
-    public void addApplication(Application application){
+    public List<Application> getApplications() {
+        return applications;
+    }
+
+    public void addApplication(Application application) {
         applications.add(application);
     }
 }

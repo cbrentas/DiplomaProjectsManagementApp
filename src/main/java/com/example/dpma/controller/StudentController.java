@@ -33,8 +33,8 @@ public class StudentController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.err.println(currentPrincipalName);
-        model.addAttribute("username",currentPrincipalName);
-        model.addAttribute("role","STUDENT");
+        model.addAttribute("username", currentPrincipalName);
+        model.addAttribute("role", "STUDENT");
 
         return "student/dashboard";
     }
@@ -58,13 +58,13 @@ public class StudentController {
     }
 
     @RequestMapping("/student/showAllSubjects")
-    public String studentShowAllSubjects(Model model){
+    public String studentShowAllSubjects(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Student student = studentService.findStudentByUserId(user.getId());
-        model.addAttribute("subjects",studentService.listStudentSubjects());
+        model.addAttribute("subjects", studentService.listStudentSubjects());
 
 
         return "/student/subjectsList";
@@ -72,17 +72,14 @@ public class StudentController {
 
 
     @RequestMapping("/student/ApplicationCreate")
-    public String applyToSubject(@RequestParam("subject_id") Integer subjectId, Model model){
+    public String applyToSubject(@RequestParam("subject_id") Integer subjectId, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Student student = studentService.findStudentByUserId(user.getId());
-        studentService.applyToSubject(student,subjectId);
+        studentService.applyToSubject(student, subjectId);
 
 
-
-
-
-        return "/student/myApplication";
+        return "/student/dashboard";
     }
 }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <title>Application List</title>
+
+    <style>
+        .btn-secondary {
+            background-color: darkred;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: darkblue;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .btn-secondary:hover {
+            background-color: #381616;
+            color: white;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+    <h3>Applications List</h3>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Student Name</th>
+            <th>Year Of Studies</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Iterate over each application and display its details -->
+        <tr th:each="myapplication : ${applications}">
+            <td th:text="${myapplication.getApplication_id()}"></td>
+            <td th:text="${myapplication.getStudent().getFull_name()}"></td>
+            <td th:text="${myapplication.getStudent().getYear_of_studies()}"></td>
+
+
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <a href="/professor/dashboard" class="btn btn-secondary float-right mb-3" role="button">Professor Dashboard</a>
+    </div>
+</div>
+
+</body>
+</html>

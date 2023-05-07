@@ -1,9 +1,6 @@
 package com.example.dpma.controller;
 
-import com.example.dpma.model.Professor;
-import com.example.dpma.model.Student;
-import com.example.dpma.model.Subject;
-import com.example.dpma.model.User;
+import com.example.dpma.model.*;
 import com.example.dpma.service.ProfessorService;
 import com.example.dpma.service.SubjectService;
 import com.example.dpma.service.UserServiceImpl;
@@ -15,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -36,8 +34,8 @@ public class ProfessorController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = authentication.getName();
         System.err.println(currentPrincipalName);
-        model.addAttribute("username",currentPrincipalName);
-        model.addAttribute("role","PROFESSOR");
+        model.addAttribute("username", currentPrincipalName);
+        model.addAttribute("role", "PROFESSOR");
 
         return "professor/dashboard";
     }
@@ -62,9 +60,9 @@ public class ProfessorController {
 
 
     @RequestMapping("/professor/showSubjectForm")
-    public String showSubjectForm(Model model){
+    public String showSubjectForm(Model model) {
 
-       Subject subject = new Subject();
+        Subject subject = new Subject();
 
         model.addAttribute("subject", subject);
         return "/professor/subjectForm";
@@ -72,10 +70,9 @@ public class ProfessorController {
     }
 
 
-
     //Add information for completed
     @RequestMapping("/professor/addSubject")
-    public String addSubject(@ModelAttribute("subject") Subject subject, Model model){
+    public String addSubject(@ModelAttribute("subject") Subject subject, Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
@@ -83,10 +80,8 @@ public class ProfessorController {
         Professor professor = professorService.findProfessorByUserId(user.getId());
         subject.setProfessor(professor);
         subjectService.saveSubject(subject);
-        professorService.saveSubject(professor,subject);
+        professorService.saveSubject(professor, subject);
         model.addAttribute("successMessage", "Subject registered successfully!");
-
-
 
 
         return "/professor/dashboard";
@@ -94,14 +89,26 @@ public class ProfessorController {
     }
 
     @RequestMapping("/professor/subjectsList")
-    public String listProfessorSubjects(Model model){
+    public String listProfessorSubjects(Model model) {
 
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Professor professor = professorService.findProfessorByUserId(user.getId());
-        model.addAttribute("subjects",professorService.listProfessorSubjects(professor));
+        model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
 
         return "professor/subjectsList";
+    }
+
+    @RequestMapping("/professor/viewApplications")
+    public String listApplication(@RequestParam("subject_id") Integer subjectId,Model model) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Professor professor = professorService.findProfessorByUserId(user.getId());
+        model.addAttribute("applications",professorService.listApplications(subjectId,professor));
+
+        return "/professor/applicationsList";
+
     }
 }

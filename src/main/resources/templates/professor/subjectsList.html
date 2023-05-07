@@ -43,6 +43,7 @@
             <th>Subject Name</th>
             <th>Objective</th>
             <th>Semester</th>
+            <th>Applications</th>
             <th>Action</th>
         </tr>
         </thead>
@@ -53,16 +54,22 @@
             <td th:text="${subject.objective}"></td>
             <td th:text="${subject.semester}"></td>
             <td>
-                <form th:action="@{/student/subjectsList}" method="post">
+                <form th:action="@{/professor/viewApplications}" method="post">
                     <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
-                    <button type="submit" class="btn btn-primary">Delete</button>
+                    <button type="submit" class="btn btn-primary">Applications</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/professor/subjectsList}" method="post">
+                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
+                    <button type="submit" class="btn btn-danger">Delete</button>
                 </form>
             </td>
         </tr>
         </tbody>
     </table>
     <div>
-    <a href="/professor/dashboard" class="btn btn-secondary float-right mb-3"  role="button">Professor Dashboard</a>
+        <a href="/professor/dashboard" class="btn btn-secondary float-right mb-3"  role="button">Professor Dashboard</a>
     </div>
 </div>
 

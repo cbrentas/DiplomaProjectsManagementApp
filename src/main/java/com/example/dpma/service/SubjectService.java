@@ -9,4 +9,6 @@ public interface SubjectService {
 
     public void saveSubject(Subject subject);
 
+    public Subject findById(Integer subjectId);
+
 }

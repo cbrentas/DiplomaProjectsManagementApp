@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -40,13 +41,15 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public void applyToSubject(Student student, Subject subject) {
+    public void applyToSubject(Student student, Integer subjectId) {
 
         Application application = new Application();
+        Optional<Subject> subject = subjectDAO.findById(subjectId);
         application.setStudent(student);
-        application.setSubject(subject);
+        application.setSubject(subject.get());
+        subject.get().addApplication(application);
         applicationDAO.save(application);
-        student.setApplication(application);
+        student.addApplication(application);
 
 
     }

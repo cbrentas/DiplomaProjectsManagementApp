@@ -72,12 +72,12 @@ public class StudentController {
 
 
     @RequestMapping("/student/ApplicationCreate")
-    public String applyToSubject(@ModelAttribute(name = "subject") Subject subject, Model model){
+    public String applyToSubject(@RequestParam("subject_id") Integer subjectId, Model model){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Student student = studentService.findStudentByUserId(user.getId());
-        studentService.applyToSubject(student,subject);
+        studentService.applyToSubject(student,subjectId);
 
 
 

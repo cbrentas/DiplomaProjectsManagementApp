@@ -2,6 +2,8 @@ package com.example.dpma.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "student")
 public class Student {
@@ -28,8 +30,8 @@ public class Student {
     @Column(name = "num_of_remaining_courses")
     private int num_of_remaining_courses;
 
-    @OneToOne(mappedBy = "student")
-    private Application application;
+    @OneToMany(mappedBy = "student")
+    private List<Application> applications;
 
     public Student(int student_id, String full_name, int year_of_studies, float curr_average_grade, int num_of_remaining_courses) {
         this.student_id = student_id;
@@ -79,15 +81,15 @@ public class Student {
         return num_of_remaining_courses;
     }
 
-    public Application getApplication() {
-        return application;
+    public List<Application> getApplications() {
+        return applications;
     }
 
-    public void setApplication(Application application) {
-        this.application = application;
+    public void setApplications(List<Application> applications) {
+        this.applications = applications;
     }
 
-    //Setters
+//Setters
 
     public void setId(int id) {
         this.student_id = id;
@@ -107,6 +109,10 @@ public class Student {
 
     public void setNum_of_remaining_courses(int num_of_remaining_courses) {
         this.num_of_remaining_courses = num_of_remaining_courses;
+    }
+
+    public void addApplication(Application application){
+        applications.add(application);
     }
 
 

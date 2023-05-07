@@ -28,7 +28,7 @@ public class Subject {
     private int semester;
 
     @OneToMany(mappedBy = "subject")
-    private List<Application> application;
+    private List<Application> applications;
     //
 
     public int getSubject_id() {
@@ -72,10 +72,14 @@ public class Subject {
     }
 
     public List<Application> getApplication() {
-        return application;
+        return applications;
     }
 
     public void setApplication(List<Application> application) {
-        this.application = application;
+        this.applications = application;
+    }
+
+    public void addApplication(Application application){
+        applications.add(application);
     }
 }

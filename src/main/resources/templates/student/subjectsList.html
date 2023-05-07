@@ -37,7 +37,7 @@
             <td th:text="${subject.getProfessor().getFull_name()}"></td>
             <td>
                 <form th:action="@{/student/ApplicationCreate}" method="post">
-                    <input type="hidden" th:value="${subject.subject_id}"/>
+                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
                     <button type="submit" class="btn btn-primary">Apply</button>
                 </form>
             </td>

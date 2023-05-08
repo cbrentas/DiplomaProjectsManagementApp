@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+`<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <!-- Required meta tags -->
@@ -40,12 +40,42 @@
   <div class="card">
     <form action="#" th:action="@{/student/save}" th:object="${student}" method="post">
       <h3>Save information</h3>
-      <input type="hidden" th:field="*{id}"/>
-      <input type="hidden" th:field="*{user}"/>
-      <input type="text" th:field="*{full_name}" placeholder="Full Name" /> <br/><br/>
-      <input type="text" th:field="*{year_of_studies}" placeholder="Year of studies" /> <br/><br/>
-      <input type="text" th:field="*{curr_average_grade}" placeholder="Current average grade" /> <br/><br/>
-      <input type="text" th:field="*{num_of_remaining_courses}" placeholder="Num. of remaining courses" /> <br/><br/>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="full_name">Full Name</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="full_name" th:field="*{full_name}" placeholder="Full Name" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="year_of_studies">Year of studies</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="year_of_studies" th:field="*{year_of_studies}" placeholder="Year of studies" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="curr_average_grade">Current average grade</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="curr_average_grade" th:field="*{curr_average_grade}" placeholder="Current average grade" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-sm-4">
+          <label for="num_of_remaining_courses">Num. of remaining courses</label>
+        </div>
+        <div class="col-sm-8">
+          <input type="text" id="num_of_remaining_courses" th:field="*{num_of_remaining_courses}" placeholder="Num. of remaining courses" />
+        </div>
+      </div>
 
       <button type="submit" class="btn btn-info col-6">Save</button>
       <br>

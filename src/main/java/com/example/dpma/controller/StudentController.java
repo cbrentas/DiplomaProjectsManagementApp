@@ -1,23 +1,19 @@
 package com.example.dpma.controller;
 
-import com.example.dpma.dao.StudentDAO;
-import com.example.dpma.dao.UserDAO;
 import com.example.dpma.model.Student;
-import com.example.dpma.model.Subject;
 import com.example.dpma.model.User;
 import com.example.dpma.service.StudentService;
-import com.example.dpma.service.UserService;
+import com.example.dpma.service.SubjectService;
 import com.example.dpma.service.UserServiceImpl;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Optional;
 
 @Controller
 public class StudentController {
@@ -27,6 +23,9 @@ public class StudentController {
 
     @Autowired
     UserServiceImpl userService;
+
+    @Autowired
+    SubjectService subjectService;
 
     @RequestMapping("/student/dashboard")
     public String getStudentHome(Model model) {
@@ -67,7 +66,13 @@ public class StudentController {
         model.addAttribute("subjects", studentService.listStudentSubjects());
 
 
-        return "/student/subjectsList";
+        return "student/subjectsList";
+    }
+
+    @RequestMapping("/student/detailedSubject")
+    public String detailedSubject(@RequestParam("subject_id")Integer subject_id, Model model){
+        model.addAttribute("subject", subjectService.findById(subject_id));
+        return "student/detailedSubject";
     }
 
 
@@ -82,4 +87,5 @@ public class StudentController {
 
         return "/student/dashboard";
     }
+
 }

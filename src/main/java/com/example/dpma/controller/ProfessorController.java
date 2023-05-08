@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
-
 @Controller
 public class ProfessorController {
 
@@ -101,7 +99,7 @@ public class ProfessorController {
         Professor professor = professorService.findProfessorByUserId(user.getId());
         model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
 
-        return "professor/subjectsList";
+        return "detailedSubject";
     }
 
     @RequestMapping("/professor/viewApplications")
@@ -126,7 +124,7 @@ public class ProfessorController {
         professorService.deleteSubject(professor, subjectId);
         model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
 
-        return "/professor/subjectsList";
+        return "detailedSubject";
     }
 
     @RequestMapping("/professor/assignSubject")

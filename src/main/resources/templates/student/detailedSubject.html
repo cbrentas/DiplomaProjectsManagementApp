@@ -47,16 +47,23 @@
         <thead>
         <tr>
             <th>Subject Name</th>
+            <th>Objective</th>
+            <th>Semester</th>
+            <th>Supervisor</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         <!-- Iterate over each subject and display its details -->
-        <tr th:each="subject : ${subjects}">
+        <tr th:object="  ${subject}">
             <td th:text="${subject.subject_name}"></td>
+            <td th:text="${subject.objective}"></td>
+            <td th:text="${subject.semester}"></td>
+            <td th:text="${subject.getProfessor().getFull_name()}"></td>
             <td>
-                <form th:action="@{/student/detailedSubject}" method="post">
+                <form th:action="@{/student/ApplicationCreate}" method="post">
                     <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
-                    <button type="submit" class="btn btn-primary">See Details</button>
+                    <button type="submit" class="btn btn-primary">Apply</button>
                 </form>
             </td>
         </tr>

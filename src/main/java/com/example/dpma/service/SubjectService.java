@@ -11,4 +11,6 @@ public interface SubjectService {
 
     public Subject findById(Integer subjectId);
 
+    public void deleteById(Integer subjectId);
+
 }

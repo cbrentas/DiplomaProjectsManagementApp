@@ -111,4 +111,16 @@ public class ProfessorController {
         return "/professor/applicationsList";
 
     }
+
+    @RequestMapping("/professor/deleteSubject")
+    public String deleteSubject(@RequestParam("subject_id") Integer subjectId,Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Professor professor = professorService.findProfessorByUserId(user.getId());
+        subjectService.deleteById(subjectId);
+        professorService.deleteSubject(professor,subjectId);
+        model.addAttribute("subjects",professorService.listProfessorSubjects(professor));
+        return "/professor/subjectsList";
+    }
 }

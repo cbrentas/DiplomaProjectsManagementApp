@@ -53,5 +53,17 @@ public class ProfessorServiceImpl implements ProfessorService {
         return subjectService.findById(subjectId).getApplications();
     }
 
+    @Override
+    public void deleteSubject(Professor professor,Integer subjectId) {
+        List<Subject> mySubjects = professor.getSubjects();
+        for(int i=0; i<mySubjects.size();i++){
+            if(mySubjects.get(i).getSubject_id() == subjectId ){
+                mySubjects.remove(i);
+            }
+        }
+
+
+    }
+
 
 }

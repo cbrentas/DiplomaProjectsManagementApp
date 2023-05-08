@@ -1,6 +1,7 @@
 package com.example.dpma.service;
 
 
+import com.example.dpma.dao.ApplicationDAO;
 import com.example.dpma.dao.SubjectDAO;
 import com.example.dpma.model.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ public class SubjectServiceImpl implements SubjectService {
 
     @Autowired
     SubjectDAO subjectDAO;
+    @Autowired
+    ApplicationDAO applicationDAO;
 
     @Override
     public void saveSubject(Subject subject){
@@ -24,4 +27,11 @@ public class SubjectServiceImpl implements SubjectService {
         return subjectDAO.findById(subjectId).get();
 
     }
+
+    @Override
+    public void deleteById(Integer subjectId) {
+        subjectDAO.deleteById(subjectId);
+    }
+
+
 }

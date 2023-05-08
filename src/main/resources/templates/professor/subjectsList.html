@@ -64,9 +64,9 @@
                 </form>
             </td>
             <td>
-                <form th:action="@{/professor/subjectsList}" method="post">
+                <form th:action="@{/professor/deleteSubject}" method="post">
                     <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn btn-secondary">Delete</button>
                 </form>
             </td>
         </tr>

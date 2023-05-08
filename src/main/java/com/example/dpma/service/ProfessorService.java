@@ -20,4 +20,8 @@ public interface ProfessorService {
     public List<Subject> listProfessorSubjects(Professor professor);
 
     public List<Application> listApplications(Integer subjectId, Professor professor);
+
+    public void deleteSubject(Professor professor,Integer subjectId);
+
+
 }

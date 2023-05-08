@@ -3,6 +3,7 @@ package com.example.dpma.controller;
 import com.example.dpma.model.*;
 import com.example.dpma.service.ProfessorService;
 import com.example.dpma.service.SubjectService;
+import com.example.dpma.service.ThesisService;
 import com.example.dpma.service.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +28,9 @@ public class ProfessorController {
 
     @Autowired
     SubjectService subjectService;
+
+    @Autowired
+    ThesisService thesisService;
 
 
     @RequestMapping("/professor/dashboard")
@@ -101,26 +105,45 @@ public class ProfessorController {
     }
 
     @RequestMapping("/professor/viewApplications")
-    public String listApplication(@RequestParam("subject_id") Integer subjectId,Model model) {
+    public String listApplication(@RequestParam("subject_id") Integer subjectId, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Professor professor = professorService.findProfessorByUserId(user.getId());
-        model.addAttribute("applications",professorService.listApplications(subjectId,professor));
+        model.addAttribute("applications", professorService.listApplications(subjectId, professor));
 
         return "/professor/applicationsList";
 
     }
 
     @RequestMapping("/professor/deleteSubject")
-    public String deleteSubject(@RequestParam("subject_id") Integer subjectId,Model model){
+    public String deleteSubject(@RequestParam("subject_id") Integer subjectId, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Professor professor = professorService.findProfessorByUserId(user.getId());
         subjectService.deleteById(subjectId);
-        professorService.deleteSubject(professor,subjectId);
-        model.addAttribute("subjects",professorService.listProfessorSubjects(professor));
+        professorService.deleteSubject(professor, subjectId);
+        model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
         return "/professor/subjectsList";
     }
-}
+
+    @RequestMapping("professor/assignSubject")
+    public String assignSubject (@RequestParam("subject_id") Integer subjectId, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Professor professor = professorService.findProfessorByUserId(user.getId());
+        professorService.assignSubject(professor, subjectId);
+
+        return "professor/subjectsList";
+
+    }
+
+
+
+
+    }
+
+
+

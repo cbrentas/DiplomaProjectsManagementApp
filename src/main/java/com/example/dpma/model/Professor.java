@@ -28,6 +28,11 @@ public class Professor {
     private List<Subject> subjects;
 
 
+
+    @OneToMany(mappedBy = "professor")
+    private List<Thesis> theses;
+
+
     public Professor(int professor_id, String full_name, String specialty, User user) {
         this.professor_id = professor_id;
         this.full_name = full_name;
@@ -44,6 +49,13 @@ public class Professor {
     }
 
 
+    public List<Thesis> getTheses() {
+        return theses;
+    }
+
+    public void setTheses(List<Thesis> theses) {
+        this.theses = theses;
+    }
     public int getProfessor_id() {
         return professor_id;
     }
@@ -82,6 +94,10 @@ public class Professor {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void addThesis(Thesis thesis){
+        theses.add(thesis);
     }
 
 

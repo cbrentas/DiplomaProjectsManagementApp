@@ -2,6 +2,7 @@ package com.example.dpma.service;
 
 import com.example.dpma.dao.ProfessorDAO;
 import com.example.dpma.dao.SubjectDAO;
+import com.example.dpma.dao.ThesisDAO;
 import com.example.dpma.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,12 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Autowired
     SubjectService subjectService;
+
+    @Autowired
+    SubjectDAO subjectDAO;
+
+    @Autowired
+    ThesisDAO thesisDAO;
 
 
     @Override
@@ -62,6 +69,22 @@ public class ProfessorServiceImpl implements ProfessorService {
             }
         }
 
+
+
+    }
+
+    @Override
+    public void assignSubject(Professor professor, Integer subjectId){
+        String string = "";
+        Subject subject = subjectDAO.findById(subjectId).get();
+        List<Application> applications = subject.getApplications();
+        Student bestStudent = subject.findBestApplicant(string, applications);
+        Thesis thesis = new Thesis();
+        thesis.setProfessor(professor);
+        thesis.setSubject(subject);
+        thesis.setStudent(bestStudent);
+        thesisDAO.save(thesis);
+        professor.addThesis(thesis);
 
     }
 

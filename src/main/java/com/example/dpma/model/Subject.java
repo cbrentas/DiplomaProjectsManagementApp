@@ -29,6 +29,10 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject")
     private List<Application> applications;
+
+
+
+
     //
 
     public int getSubject_id() {
@@ -82,5 +86,17 @@ public class Subject {
 
     public void addApplication(Application application) {
         applications.add(application);
+    }
+
+    public BestApplicantStrategy bestApplicantStrategy(String string){
+        BestApplicantStrategyFactory bestApplicantStrategyFactory = new BestApplicantStrategyFactory();
+        BestApplicantStrategy bestApplicantStrategy = bestApplicantStrategyFactory.createStrategy(string);
+        return bestApplicantStrategy;
+    }
+
+    public Student findBestApplicant(String string, List<Application> applications){
+
+        Student bestStudent = bestApplicantStrategy(string).findBestApplicant(applications);
+        return bestStudent;
     }
 }

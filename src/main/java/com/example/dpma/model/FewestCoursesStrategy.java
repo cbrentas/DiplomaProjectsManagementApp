@@ -7,7 +7,14 @@ public class FewestCoursesStrategy extends TemplateStrategyAlgorithm{
 
     @Override
     public int compareApplications(Application fapplication, Application sapplication) {
-        return 0;
+        if (fapplication.getStudent().getNum_of_remaining_courses() < sapplication.getStudent().getNum_of_remaining_courses()){
+            return fapplication.getApplication_id();
+        }
+        else if(fapplication.getStudent().getNum_of_remaining_courses() > sapplication.getStudent().getNum_of_remaining_courses()){
+            return sapplication.getApplication_id();
+        }
+        else
+            return fapplication.getApplication_id();
     }
 
 }

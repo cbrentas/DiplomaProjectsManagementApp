@@ -111,7 +111,7 @@ public class ProfessorController {
         User user = userService.loadUserByName(currentPrincipalName);
         Professor professor = professorService.findProfessorByUserId(user.getId());
         model.addAttribute("applications", professorService.listApplications(subjectId, professor));
-
+        model.addAttribute("subjectId",subjectId);
         return "/professor/applicationsList";
 
     }
@@ -125,25 +125,27 @@ public class ProfessorController {
         subjectService.deleteById(subjectId);
         professorService.deleteSubject(professor, subjectId);
         model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
+
         return "/professor/subjectsList";
     }
 
-    @RequestMapping("professor/assignSubject")
-    public String assignSubject (@RequestParam("subject_id") Integer subjectId, Model model){
+    @RequestMapping("/professor/assignSubject")
+    public String assignSubject(@RequestParam("subjectId") Integer subjectId, @RequestParam("strategy") String strategy, Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Professor professor = professorService.findProfessorByUserId(user.getId());
-        professorService.assignSubject(professor, subjectId);
 
-        return "professor/subjectsList";
 
+        professorService.assignSubject(professor, subjectId, strategy);
+        return "redirect:/professor/subjectsList";
     }
+}
 
 
 
 
-    }
+
 
 
 

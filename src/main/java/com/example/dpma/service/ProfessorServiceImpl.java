@@ -74,11 +74,10 @@ public class ProfessorServiceImpl implements ProfessorService {
     }
 
     @Override
-    public void assignSubject(Professor professor, Integer subjectId){
-        String string = "";
+    public void assignSubject(Professor professor, Integer subjectId,String strategy){
         Subject subject = subjectDAO.findById(subjectId).get();
         List<Application> applications = subject.getApplications();
-        Student bestStudent = subject.findBestApplicant(string, applications);
+        Student bestStudent = subject.findBestApplicant(strategy, applications);
         Thesis thesis = new Thesis();
         thesis.setProfessor(professor);
         thesis.setSubject(subject);

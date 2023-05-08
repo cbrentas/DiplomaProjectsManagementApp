@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,10 +15,12 @@
             background-color: #4b3f3f;
             color: #fff;
         }
+
         .btn-secondary {
             background-color: darkred;
             color: white;
         }
+
         .btn-3rd {
             background-color: #e5ec40;
             color: white;
@@ -36,6 +37,7 @@
             color: white;
             transform: translateY(-3px);
         }
+
         .btn-3rd:hover {
             background-color: darkgoldenrod;
             color: white;
@@ -45,22 +47,28 @@
     </style>
 </head>
 
-
 <body>
 
 <div class="container">
     <h3>Applications List</h3>
-    <div class="form-group row">
-        <label for="strategyDropdown" class="col-sm-2 col-form-label">Strategy:</label>
-        <div class="col-sm-4">
-            <select class="form-control" id="strategyDropdown">
-                <option value="random">Random Choice</option>
-                <option value="bestAvg">Best Average Courses Grade</option>
-                <option value="fewestRemaining">Fewest Remaining Courses for Graduation</option>
-                <option value="aboveThresh">Average Courses Grade Above Threshold and Few Remaining Courses</option>
-            </select>
+    <form action="/professor/assignSubject" method="GET">
+        <input type="hidden" name="subject_id" th:value="${subjectId}"/>
+        <div class="form-group row">
+            <label for="strategyDropdown" class="col-sm-2 col-form-label">Strategy:</label>
+            <div class="col-sm-4">
+                <select class="form-control" id="strategyDropdown" name="strategy">
+                    <option value="random">Random Choice</option>
+                    <option value="bestAvg">Best Average Courses Grade</option>
+                    <option value="fewestRemaining">Fewest Remaining Courses for Graduation</option>
+                    <option value="aboveThresh">Average Courses Grade Above Threshold and Few Remaining Courses</option>
+                </select>
+            </div>
+            <input type="hidden" name="subjectId" th:value="${subjectId}"/>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary">Apply</button>
+            </div>
         </div>
-    </div>
+    </form>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -76,14 +84,13 @@
             <td th:text="${myapplication.getApplication_id()}"></td>
             <td th:text="${myapplication.getStudent().getFull_name()}"></td>
             <td th:text="${myapplication.getStudent().getYear_of_studies()}"></td>
-
-
         </tr>
         </tbody>
     </table>
     <div>
-        <a href="/professor/subjectsList" class="btn btn-secondary float-right mb-3 mr-4" role="button" >Subject List</a>
-        <a href="/professor/dashboard" class="btn btn-3rd float-right mb-3" role="button" style="margin-right: 10px;" >Professor Dashboard</a>
+        <a href="/professor/subjectsList" class="btn btn-secondary float-right mb-3 mr-4" role="button">Subject List</a>
+
+
     </div>
 </div>
 

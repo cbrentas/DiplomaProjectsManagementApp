@@ -50,6 +50,17 @@
 
 <div class="container">
     <h3>Applications List</h3>
+    <div class="form-group row">
+        <label for="strategyDropdown" class="col-sm-2 col-form-label">Strategy:</label>
+        <div class="col-sm-4">
+            <select class="form-control" id="strategyDropdown">
+                <option value="random">Random Choice</option>
+                <option value="bestAvg">Best Average Courses Grade</option>
+                <option value="fewestRemaining">Fewest Remaining Courses for Graduation</option>
+                <option value="aboveThresh">Average Courses Grade Above Threshold and Few Remaining Courses</option>
+            </select>
+        </div>
+    </div>
     <table class="table table-striped">
         <thead>
         <tr>

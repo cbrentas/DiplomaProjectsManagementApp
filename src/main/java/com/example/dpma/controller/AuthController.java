@@ -43,4 +43,11 @@ public class AuthController {
 
         return "auth/signin";
     }
+
+    @RequestMapping("/AboutUs")
+    public String AboutUsPage() {
+        return "auth/AboutUs";
+    }
+
+
 }

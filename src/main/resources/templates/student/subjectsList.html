@@ -55,7 +55,7 @@
             <td th:text="${subject.subject_name}"></td>
             <td>
                 <form th:action="@{/student/detailedSubject}" method="post">
-                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
+                    <input type="hidden" name="subject_id" th:value="${subject.id}"/>
                     <button type="submit" class="btn btn-primary">See Details</button>
                 </form>
             </td>
@@ -65,6 +65,7 @@
     <div>
         <a href="/student/dashboard" class="btn btn-secondary float-right mb-3"  role="button">Student Dashboard</a>
     </div>
+    <span th:utext="${SuccessMessage}"></span>
 </div>
 
 </body>

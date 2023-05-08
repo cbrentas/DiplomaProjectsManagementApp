@@ -62,7 +62,7 @@
             <td th:text="${subject.getProfessor().getFull_name()}"></td>
             <td>
                 <form th:action="@{/student/ApplicationCreate}" method="post">
-                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
+                    <input type="hidden" name="subject_id" th:value="${subject.id}"/>
                     <button type="submit" class="btn btn-primary">Apply</button>
                 </form>
             </td>
@@ -72,6 +72,7 @@
     <div>
         <a href="/student/dashboard" class="btn btn-secondary float-right mb-3"  role="button">Student Dashboard</a>
     </div>
+
 </div>
 
 </body>

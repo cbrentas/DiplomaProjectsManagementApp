@@ -47,7 +47,7 @@
           action="#" th:action="@{/professor/addSubject}" th:object="${subject}" method="post">
     <div class="card">
       <h3>Add Subject</h3>
-      <input type="hidden" th:field="*{subject_id}"/>
+      <input type="hidden" th:field="*{id}"/>
       <input type="hidden" th:field="*{professor}"/>
       <input type="text" th:field="*{subject_name}" placeholder="Subject Name" /> <br/><br/>
       <input type="text" th:field="*{objective}" placeholder="Objective" /> <br/><br/>

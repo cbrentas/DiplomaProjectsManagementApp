@@ -2,6 +2,7 @@ package com.example.dpma.controller;
 
 import com.example.dpma.model.Student;
 import com.example.dpma.model.User;
+import com.example.dpma.service.ApplicationService;
 import com.example.dpma.service.StudentService;
 import com.example.dpma.service.SubjectService;
 import com.example.dpma.service.UserServiceImpl;
@@ -26,6 +27,10 @@ public class StudentController {
 
     @Autowired
     SubjectService subjectService;
+
+    @Autowired
+    ApplicationService applicationService;
+
 
     @RequestMapping("/student/dashboard")
     public String getStudentHome(Model model) {
@@ -82,8 +87,15 @@ public class StudentController {
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Student student = studentService.findStudentByUserId(user.getId());
-        studentService.applyToSubject(student, subjectId);
 
+        if(applicationService.isApplicationPresent(student.getId(), subjectId)){
+            model.addAttribute("SuccessMessage", "You have already applied for this subject.");
+            model.addAttribute("subjects", studentService.listStudentSubjects());
+            return "/student/subjectsList";
+        }
+        else {
+            studentService.applyToSubject(student, subjectId);
+        }
 
         return "/student/dashboard";
     }

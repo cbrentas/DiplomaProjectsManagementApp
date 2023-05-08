@@ -5,8 +5,6 @@ import com.example.dpma.dao.SubjectDAO;
 import com.example.dpma.dao.ThesisDAO;
 import com.example.dpma.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -64,7 +62,7 @@ public class ProfessorServiceImpl implements ProfessorService {
     public void deleteSubject(Professor professor,Integer subjectId) {
         List<Subject> mySubjects = professor.getSubjects();
         for(int i=0; i<mySubjects.size();i++){
-            if(mySubjects.get(i).getSubject_id() == subjectId ){
+            if(mySubjects.get(i).getId() == subjectId ){
                 mySubjects.remove(i);
             }
         }

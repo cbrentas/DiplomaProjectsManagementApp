@@ -23,7 +23,7 @@ public interface ProfessorService {
 
     public void deleteSubject(Professor professor,Integer subjectId);
 
-    public void assignSubject(Professor professor, Integer subjectId,String strategy);
+    public Student assignSubject(Professor professor, Integer subjectId,String strategy);
 
     public void assignSubjectToParticular(Professor professor, Integer subjectId, Integer studentId);
 

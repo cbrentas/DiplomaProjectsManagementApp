@@ -2,10 +2,7 @@ package com.example.dpma.controller;
 
 import com.example.dpma.model.Student;
 import com.example.dpma.model.User;
-import com.example.dpma.service.ApplicationService;
-import com.example.dpma.service.StudentService;
-import com.example.dpma.service.SubjectService;
-import com.example.dpma.service.UserServiceImpl;
+import com.example.dpma.service.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,9 @@ public class StudentController {
 
     @Autowired
     ApplicationService applicationService;
+
+    @Autowired
+    ThesisService thesisService;
 
 
     @RequestMapping("/student/dashboard")
@@ -90,6 +90,12 @@ public class StudentController {
 
         if(applicationService.isApplicationPresent(student.getId(), subjectId)){
             model.addAttribute("SuccessMessage", "You have already applied for this subject.");
+            model.addAttribute("subjects", studentService.listStudentSubjects());
+            return "/student/subjectsList";
+        }
+        else if(thesisService.isThesisPresent(student.getId())){
+
+            model.addAttribute("SuccessMessage", "You are already assigned to a thesis subject.");
             model.addAttribute("subjects", studentService.listStudentSubjects());
             return "/student/subjectsList";
         }

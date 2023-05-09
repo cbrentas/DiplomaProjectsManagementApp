@@ -1,11 +1,10 @@
 package com.example.dpma.service;
 
-import com.example.dpma.dao.ProfessorDAO;
-import com.example.dpma.dao.StudentDAO;
-import com.example.dpma.dao.SubjectDAO;
-import com.example.dpma.dao.ThesisDAO;
+import com.example.dpma.dao.*;
 import com.example.dpma.model.*;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -28,6 +27,9 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Autowired
     StudentDAO studentDAO;
+
+    @Autowired
+    ApplicationDAO applicationDAO;
 
 
     @Override
@@ -75,11 +77,17 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     }
 
+
+
     @Override
-    public void assignSubject(Professor professor, Integer subjectId,String strategy){
+    public Student assignSubject(Professor professor, Integer subjectId,String strategy){
         Subject subject = subjectDAO.findById(subjectId).get();
         List<Application> applications = subject.getApplications();
         Student bestStudent = subject.findBestApplicant(strategy, applications);
+        if(bestStudent==null){
+            return null;
+        }
+
         Thesis thesis = new Thesis();
         thesis.setProfessor(professor);
         thesis.setSubject(subject);
@@ -87,7 +95,13 @@ public class ProfessorServiceImpl implements ProfessorService {
         thesisDAO.save(thesis);
         professor.addThesis(thesis);
 
+
+        applicationDAO.deleteByStudentId(bestStudent.getId());
+
+        return bestStudent;
     }
+
+
 
     @Override
     public void assignSubjectToParticular(Professor professor, Integer subjectId, Integer studentId){
@@ -97,6 +111,9 @@ public class ProfessorServiceImpl implements ProfessorService {
         thesis.setStudent(studentDAO.findById(studentId).get());
         thesisDAO.save(thesis);
         professor.addThesis(thesis);
+
+
+        applicationDAO.deleteByStudentId(studentId);
     }
 
 

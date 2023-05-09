@@ -16,5 +16,7 @@ public interface StudentService {
 
     public void applyToSubject(Student student,Integer subjectId);
 
+    public Student findStudentById(int student_id);
+
 
 }

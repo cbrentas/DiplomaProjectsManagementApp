@@ -1,4 +1,4 @@
-`<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <!-- Required meta tags -->
@@ -40,42 +40,69 @@
   <div class="card">
     <form action="#" th:action="@{/student/save}" th:object="${student}" method="post">
       <h3>Save information</h3>
+      <input type="hidden" th:field="*{id}"/>
+      <input type="hidden" th:field="*{user}"/>
+      <input type="text" th:field="*{full_name}" placeholder="Full Name" /> <br/><br/>
+      <input type="text" th:field="*{year_of_studies}" placeholder="Year of studies" /> <br/><br/>
+      <input type="text" th:field="*{curr_average_grade}" placeholder="Current average grade" /> <br/><br/>
+      <input type="text" th:field="*{num_of_remaining_courses}" placeholder="Num. of remaining courses" /> <br/><br/>
 
-      <div class="row">
-        <div class="col-sm-4">
-          <label for="full_name">Full Name</label>
-        </div>
-        <div class="col-sm-8">
-          <input type="text" id="full_name" th:field="*{full_name}" placeholder="Full Name" />
-        </div>
-      </div>
+      <button type="submit" class="btn btn-info col-6">Save</button>
+      <br>
+      <a href="/student/dashboard" class="btn btn-secondary  mt-3 col-10" style="background-color: darkred;" role="button">Go Back</a>
+    </form>
+  </div>
+</div>
 
-      <div class="row">
-        <div class="col-sm-4">
-          <label for="year_of_studies">Year of studies</label>
-        </div>
-        <div class="col-sm-8">
-          <input type="text" id="year_of_studies" th:field="*{year_of_studies}" placeholder="Year of studies" />
-        </div>
-      </div>
+</body>
+</html><!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-      <div class="row">
-        <div class="col-sm-4">
-          <label for="curr_average_grade">Current average grade</label>
-        </div>
-        <div class="col-sm-8">
-          <input type="text" id="curr_average_grade" th:field="*{curr_average_grade}" placeholder="Current average grade" />
-        </div>
-      </div>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-      <div class="row">
-        <div class="col-sm-4">
-          <label for="num_of_remaining_courses">Num. of remaining courses</label>
-        </div>
-        <div class="col-sm-8">
-          <input type="text" id="num_of_remaining_courses" th:field="*{num_of_remaining_courses}" placeholder="Num. of remaining courses" />
-        </div>
-      </div>
+  <title>Register</title>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: #fff;
+    }
+    /* Center container horizontally and vertically */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 80vh;
+    }
+
+    .card {
+      background-color: #000000;
+      border: 1px solid rgba(14, 13, 13, 0.29);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, .1);
+      max-width: 800px; /* Updated max-width */
+      padding: 30px;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div class="card">
+    <form action="#" th:action="@{/student/save}" th:object="${student}" method="post">
+      <h3>Save information</h3>
+      <input type="hidden" th:field="*{id}"/>
+      <input type="hidden" th:field="*{user}"/>
+      <input type="text" th:field="*{full_name}" placeholder="Full Name" /> <br/><br/>
+      <input type="text" th:field="*{year_of_studies}" placeholder="Year of studies" /> <br/><br/>
+      <input type="text" th:field="*{curr_average_grade}" placeholder="Current average grade" /> <br/><br/>
+      <input type="text" th:field="*{num_of_remaining_courses}" placeholder="Num. of remaining courses" /> <br/><br/>
 
       <button type="submit" class="btn btn-info col-6">Save</button>
       <br>

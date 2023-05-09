@@ -30,4 +30,5 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
     }
     public abstract int compareApplications(Application fapplication, Application sapplication);
 
+
 }

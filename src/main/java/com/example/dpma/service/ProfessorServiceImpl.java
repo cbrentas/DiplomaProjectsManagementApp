@@ -1,6 +1,7 @@
 package com.example.dpma.service;
 
 import com.example.dpma.dao.ProfessorDAO;
+import com.example.dpma.dao.StudentDAO;
 import com.example.dpma.dao.SubjectDAO;
 import com.example.dpma.dao.ThesisDAO;
 import com.example.dpma.model.*;
@@ -24,6 +25,9 @@ public class ProfessorServiceImpl implements ProfessorService {
 
     @Autowired
     ThesisDAO thesisDAO;
+
+    @Autowired
+    StudentDAO studentDAO;
 
 
     @Override
@@ -83,6 +87,16 @@ public class ProfessorServiceImpl implements ProfessorService {
         thesisDAO.save(thesis);
         professor.addThesis(thesis);
 
+    }
+
+    @Override
+    public void assignSubjectToParticular(Professor professor, Integer subjectId, Integer studentId){
+        Thesis thesis = new Thesis();
+        thesis.setProfessor(professor);
+        thesis.setSubject(subjectDAO.findById(subjectId).get());
+        thesis.setStudent(studentDAO.findById(studentId).get());
+        thesisDAO.save(thesis);
+        professor.addThesis(thesis);
     }
 
 

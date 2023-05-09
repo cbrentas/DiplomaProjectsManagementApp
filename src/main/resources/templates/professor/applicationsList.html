@@ -65,7 +65,7 @@
             </div>
             <input type="hidden" name="subjectId" th:value="${subjectId}"/>
             <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary">Apply</button>
+                <button type="submit" class="btn btn-primary">Assign</button>
             </div>
         </div>
     </form>
@@ -84,6 +84,14 @@
             <td th:text="${myapplication.getApplication_id()}"></td>
             <td th:text="${myapplication.getStudent().getFull_name()}"></td>
             <td th:text="${myapplication.getStudent().getYear_of_studies()}"></td>
+
+            <td>
+                <form th:action="@{/professor/assignParticular}" method="post">
+                    <input type="hidden" name="subject_id" th:value="${myapplication.getSubject().getId()}"/>
+                    <input type="hidden" name="student_id" th:value="${myapplication.getStudent().getId()}"/>
+                    <button type="submit" class="btn btn-secondary">Assign</button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>

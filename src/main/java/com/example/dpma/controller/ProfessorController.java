@@ -5,6 +5,7 @@ import com.example.dpma.service.ProfessorService;
 import com.example.dpma.service.SubjectService;
 import com.example.dpma.service.ThesisService;
 import com.example.dpma.service.UserServiceImpl;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -99,7 +100,7 @@ public class ProfessorController {
         Professor professor = professorService.findProfessorByUserId(user.getId());
         model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
 
-        return "detailedSubject";
+        return "professor/subjectsList";
     }
 
     @RequestMapping("/professor/viewApplications")
@@ -124,7 +125,7 @@ public class ProfessorController {
         professorService.deleteSubject(professor, subjectId);
         model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
 
-        return "detailedSubject";
+        return "professor/subjectsList";
     }
 
     @RequestMapping("/professor/assignSubject")
@@ -136,6 +137,17 @@ public class ProfessorController {
 
 
         professorService.assignSubject(professor, subjectId, strategy);
+        return "redirect:/professor/subjectsList";
+    }
+
+    @RequestMapping("/professor/assignParticular")
+    public String assignSubjectToParticular(@RequestParam("subject_id") Integer subjectId, @RequestParam("student_id")Integer studentId, Model model){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = auth.getName();
+        User user = userService.loadUserByName(currentPrincipalName);
+        Professor professor = professorService.findProfessorByUserId(user.getId());
+
+        professorService.assignSubjectToParticular(professor, subjectId, studentId);
         return "redirect:/professor/subjectsList";
     }
 }

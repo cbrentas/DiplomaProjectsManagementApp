@@ -59,13 +59,13 @@
             <td th:text="${subject.semester}"></td>
             <td>
                 <form th:action="@{/professor/viewApplications}" method="post">
-                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
+                    <input type="hidden" name="subject_id" th:value="${subject.id}"/>
                     <button type="submit" class="btn btn-primary">Applications</button>
                 </form>
             </td>
             <td>
                 <form th:action="@{/professor/deleteSubject}" method="post">
-                    <input type="hidden" name="subject_id" th:value="${subject.subject_id}"/>
+                    <input type="hidden" name="subject_id" th:value="${subject.id}"/>
                     <button type="submit" class="btn btn-secondary">Delete</button>
                 </form>
             </td>

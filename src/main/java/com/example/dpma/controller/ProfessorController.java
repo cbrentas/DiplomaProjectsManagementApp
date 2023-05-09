@@ -33,6 +33,8 @@ public class ProfessorController {
 
     @Autowired
     StudentService studentService;
+    @Autowired
+    ApplicationService applicationService;
 
     @RequestMapping("/professor/dashboard")
     public String getProfessorHome(Model model) {
@@ -123,8 +125,10 @@ public class ProfessorController {
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Professor professor = professorService.findProfessorByUserId(user.getId());
+
+
         subjectService.deleteById(subjectId);
-        professorService.deleteSubject(professor, subjectId);
+
         model.addAttribute("subjects", professorService.listProfessorSubjects(professor));
 
         return "professor/subjectsList";

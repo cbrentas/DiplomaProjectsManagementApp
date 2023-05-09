@@ -21,7 +21,6 @@ public interface ProfessorService {
 
     public List<Application> listApplications(Integer subjectId, Professor professor);
 
-    public void deleteSubject(Professor professor,Integer subjectId);
 
     public Student assignSubject(Professor professor, Integer subjectId,String strategy);
 

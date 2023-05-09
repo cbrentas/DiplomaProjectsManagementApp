@@ -1,7 +1,6 @@
 package com.example.dpma.dao;
 
 import com.example.dpma.model.Application;
-import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -15,7 +14,7 @@ public interface ApplicationDAO extends JpaRepository<Application,Integer> {
 
 
 
-
+    public void deleteApplicationsByStudentId(Integer student_id);
 
     @Modifying
     @Query("DELETE FROM Application a WHERE a.student.student_id = :studentId")

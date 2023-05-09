@@ -35,7 +35,7 @@ public class Subject {
 
     //
 
-    public int getSubject_id() {
+    public int getId() {
         return subject_id;
     }
 

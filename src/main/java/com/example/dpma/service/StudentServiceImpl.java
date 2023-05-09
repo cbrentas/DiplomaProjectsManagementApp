@@ -45,7 +45,6 @@ public class StudentServiceImpl implements StudentService {
 
         Application application = new Application();
         Optional<Subject> subject = subjectDAO.findById(subjectId);
-
         application.setStudent(student);
         application.setSubject(subject.get());
         subject.get().addApplication(application);
@@ -55,5 +54,4 @@ public class StudentServiceImpl implements StudentService {
 
     }
 }
-
 

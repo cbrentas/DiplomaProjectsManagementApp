@@ -97,19 +97,19 @@ public class StudentController {
         if(applicationService.isApplicationPresent(student.getId(), subjectId)){
             model.addAttribute("SuccessMessage", "You have already applied for this subject.");
             model.addAttribute("subjects", studentService.listStudentSubjects());
-            return "/student/subjectsList";
         }
         else if(thesisService.isThesisPresent(student.getId())){
 
             model.addAttribute("SuccessMessage", "You are already assigned to a thesis subject.");
             model.addAttribute("subjects", studentService.listStudentSubjects());
-            return "/student/subjectsList";
         }
         else {
+            model.addAttribute("applied", "You have successfully apllied to this subject");
+            model.addAttribute("subjects", studentService.listStudentSubjects());
             studentService.applyToSubject(student, subjectId);
         }
 
-        return "/student/dashboard";
+        return "/student/subjectsList";
     }
 
 }

@@ -31,6 +31,15 @@
       padding: 30px;
       text-align: center;
     }
+
+    .btn-secondary:hover {
+      background-color: darkred;
+      opacity: 0.8;
+    }
+    .card h3 {
+      color: #000000; /* You can replace #ff0000 with your desired color code */
+    }
+
   </style>
 </head>
 
@@ -40,19 +49,35 @@
   <div class="card">
     <form action="#" th:action="@{/student/save}" th:object="${student}" method="post">
       <h3>Save information</h3>
-      <input type="hidden" th:field="*{id}"/>
-      <input type="hidden" th:field="*{user}"/>
-      <input type="text" th:field="*{full_name}" placeholder="Full Name" /> <br/><br/>
-      <input type="text" th:field="*{year_of_studies}" placeholder="Year of studies" /> <br/><br/>
-      <input type="text" th:field="*{curr_average_grade}" placeholder="Current average grade" /> <br/><br/>
-      <input type="text" th:field="*{num_of_remaining_courses}" placeholder="Num. of remaining courses" /> <br/><br/>
+      <div class="form-group">
+        <label for="full_name">Full Name:</label>
+        <input type="hidden" th:field="*{id}"/>
+        <input type="hidden" th:field="*{user}"/>
+        <input type="text" th:field="*{full_name}" id="full_name" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="year_of_studies">Year of studies:</label>
+        <input type="text" th:field="*{year_of_studies}" id="year_of_studies" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="curr_average_grade">Current average grade:</label>
+        <input type="text" th:field="*{curr_average_grade}" id="curr_average_grade" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="num_of_remaining_courses">Num. of remaining courses:</label>
+        <input type="text" th:field="*{num_of_remaining_courses}" id="num_of_remaining_courses" class="form-control" />
+      </div>
 
       <button type="submit" class="btn btn-info col-6">Save</button>
       <br>
-      <a href="/student/dashboard" class="btn btn-secondary  mt-3 col-10" style="background-color: darkred;" role="button">Go Back</a>
+      <a href="/student/dashboard" class="btn btn-secondary  mt-3 col-10" style="background-color: red;" role="button">Go Back</a>
     </form>
   </div>
 </div>
 
 </body>
+
 </html>

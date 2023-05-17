@@ -31,6 +31,14 @@
       padding: 30px;
       text-align: center;
     }
+    .btn-secondary:hover {
+      background-color: darkred;
+      opacity: 0.8;
+    }
+    .card h3 {
+      color: #000000; /* You can replace #ff0000 with your desired color code */
+    }
+
   </style>
 </head>
 
@@ -40,21 +48,33 @@
   <div class="card">
     <form action="#" th:action="@{/professor/saveGrades}" th:object="${thesis}" method="post">
       <h3>Save information</h3>
-      <input type="hidden" th:field="*{thesis_id}"/>
-      <input type="hidden" th:field="*{professor}"/>
-      <input type="hidden" th:field="*{student}"/>
-      <input type="hidden" th:field="*{subject}"/>
 
-      <input type="text" th:field="*{grade_impl}" placeholder="Implementation Grade" /> <br/><br/>
-      <input type="text" th:field="*{grade_rep}" placeholder="Report Grade" /> <br/><br/>
-      <input type="text" th:field="*{grade_pres}" placeholder="Presentation Grade" /> <br/><br/>
+      <div class="form-group">
+        <label for="grade_impl">Implementation Grade:</label>
+        <input type="hidden" th:field="*{thesis_id}"/>
+        <input type="hidden" th:field="*{professor}"/>
+        <input type="hidden" th:field="*{student}"/>
+        <input type="hidden" th:field="*{subject}"/>
+        <input type="text" th:field="*{grade_impl}" id="grade_impl" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="grade_rep">Report Grade:</label>
+        <input type="text" th:field="*{grade_rep}" id="grade_rep" class="form-control" />
+      </div>
+
+      <div class="form-group">
+        <label for="grade_pres">Presentation Grade:</label>
+        <input type="text" th:field="*{grade_pres}" id="grade_pres" class="form-control" />
+      </div>
 
       <button type="submit" class="btn btn-info col-6">Save</button>
       <br>
-      <a href="/professor/thesisList" class="btn btn-secondary  mt-3 col-10" style="background-color: darkred;" role="button">Go Back</a>
+      <a href="/professor/thesisList" class="btn btn-secondary mt-3 col-10" style="background-color: red;" role="button">Go Back</a>
     </form>
   </div>
 </div>
 
 </body>
+
 </html>

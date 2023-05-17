@@ -24,7 +24,7 @@ public class Professor {
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany(mappedBy = "professor", cascade = CascadeType.REMOVE)
     private List<Subject> subjects;
 
 

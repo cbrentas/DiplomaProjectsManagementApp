@@ -15,8 +15,8 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
 
     @Override
     public Student findBestApplicant(List<Application> applications){
-         Application bestApplication = applications.get(0);
-         int appID;
+        Application bestApplication = applications.get(0);
+        int appID;
 
         for (int i =1; i < applications.size(); i++){
             appID = compareApplications(bestApplication, applications.get(i));
@@ -29,5 +29,6 @@ public abstract class TemplateStrategyAlgorithm implements BestApplicantStrategy
 
     }
     public abstract int compareApplications(Application fapplication, Application sapplication);
+
 
 }

@@ -24,16 +24,16 @@ public class Thesis {
     private Student student;
 
     @Column(name = "grade_impl")
-    private float grade_impl;
+    private double grade_impl;
 
     @Column(name = "grade_rep")
-    private float grade_rep;
+    private double grade_rep;
 
     @Column(name = "grade_pres")
-    private float grade_pres;
+    private double grade_pres;
 
     @Column(name = "grade_total")
-    private float grade_total;
+    private double grade_total;
 
     //
     public int getThesis_id() {
@@ -68,35 +68,35 @@ public class Thesis {
         this.student = student;
     }
 
-    public float getGrade_impl() {
+    public double getGrade_impl() {
         return grade_impl;
     }
 
-    public void setGrade_impl(float grade_impl) {
+    public void setGrade_impl(double grade_impl) {
         this.grade_impl = grade_impl;
     }
 
-    public float getGrade_rep() {
+    public double getGrade_rep() {
         return grade_rep;
     }
 
-    public void setGrade_rep(float grade_rep) {
+    public void setGrade_rep(double grade_rep) {
         this.grade_rep = grade_rep;
     }
 
-    public float getGrade_pres() {
+    public double getGrade_pres() {
         return grade_pres;
     }
 
-    public void setGrade_pres(float grade_pres) {
+    public void setGrade_pres(double grade_pres) {
         this.grade_pres = grade_pres;
     }
 
-    public float getGrade_total() {
+    public double getGrade_total() {
         return grade_total;
     }
 
-    public void setGrade_total(float grade_total) {
+    public void setGrade_total(double grade_total) {
         this.grade_total = grade_total;
     }
 }

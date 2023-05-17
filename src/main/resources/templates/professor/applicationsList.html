@@ -46,7 +46,7 @@
 <div class="container my-4">
 
     <!-- Application list heading -->
-    <h1 class="text-center mb-5">Applications List</h1>
+    <h1 class="text-center mb-5" th:text="'Applications List for ' + ${subject.subject_name}"></h1>
 
     <!-- Strategy form -->
     <form action="/professor/assignSubject" method="GET">
@@ -63,7 +63,7 @@
             </div>
             <input type="hidden" name="subjectId" th:value="${subjectId}"/>
             <div class="col-sm-2">
-                <button type="submit" class="btn btn-primary" style="background-color: #be8514;">Assign</button>
+                <button  type="submit" class="btn btn-primary" style="background-color: #be8514;">Assign</button>
             </div>
         </div>
     </form>

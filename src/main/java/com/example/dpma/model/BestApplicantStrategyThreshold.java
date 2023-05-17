@@ -1,12 +1,20 @@
 package com.example.dpma.model;
 
-public class BestApplicantStrategyThreshold extends  TemplateStrategyAlgorithm{
+import java.util.List;
+
+public class BestApplicantStrategyThreshold implements BestApplicantStrategy{
+
 
 
     public BestApplicantStrategyThreshold(){}
 
     @Override
-    public int compareApplications(Application fapplication, Application sapplication) {
-        return 0;
+    public Student findBestApplicant(List<Application> applications) {
+        for(int i=0; i<applications.size(); i++){
+            if(applications.get(i).getStudent().getCurr_average_grade()>=5 && applications.get(i).getStudent().getNum_of_remaining_courses()<=5){
+                return applications.get(i).getStudent();
+            }
+        }
+        return null;
     }
 }

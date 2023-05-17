@@ -2,10 +2,7 @@ package com.example.dpma.controller;
 
 import com.example.dpma.model.Student;
 import com.example.dpma.model.User;
-import com.example.dpma.service.ApplicationService;
-import com.example.dpma.service.StudentService;
-import com.example.dpma.service.SubjectService;
-import com.example.dpma.service.UserServiceImpl;
+import com.example.dpma.service.*;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +27,9 @@ public class StudentController {
 
     @Autowired
     ApplicationService applicationService;
+
+    @Autowired
+    ThesisService thesisService;
 
 
     @RequestMapping("/student/dashboard")
@@ -57,6 +57,11 @@ public class StudentController {
 
     @RequestMapping("/student/save")
     public String studentSave(@ModelAttribute("student") Student student, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.err.println(currentPrincipalName);
+        model.addAttribute("username", currentPrincipalName);
+        model.addAttribute("role", "STUDENT");
         studentService.saveProfile(student);
         return "student/dashboard";
     }
@@ -87,9 +92,16 @@ public class StudentController {
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);
         Student student = studentService.findStudentByUserId(user.getId());
-
+        model.addAttribute("username", currentPrincipalName);
+        model.addAttribute("role", "STUDENT");
         if(applicationService.isApplicationPresent(student.getId(), subjectId)){
             model.addAttribute("SuccessMessage", "You have already applied for this subject.");
+            model.addAttribute("subjects", studentService.listStudentSubjects());
+            return "/student/subjectsList";
+        }
+        else if(thesisService.isThesisPresent(student.getId())){
+
+            model.addAttribute("SuccessMessage", "You are already assigned to a thesis subject.");
             model.addAttribute("subjects", studentService.listStudentSubjects());
             return "/student/subjectsList";
         }

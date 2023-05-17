@@ -121,6 +121,7 @@ public class ProfessorController {
 
     @RequestMapping("/professor/deleteSubject")
     public String deleteSubject(@RequestParam("subject_id") Integer subjectId, Model model) {
+        System.out.println(subjectId);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String currentPrincipalName = auth.getName();
         User user = userService.loadUserByName(currentPrincipalName);

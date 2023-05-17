@@ -30,7 +30,7 @@ public class Student {
     @Column(name = "num_of_remaining_courses")
     private int num_of_remaining_courses;
 
-    @OneToMany(mappedBy = "student", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "student")
     private List<Application> applications;
 
     public Student(int student_id, String full_name, int year_of_studies, float curr_average_grade, int num_of_remaining_courses) {

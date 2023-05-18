@@ -27,7 +27,7 @@ public class Subject {
     @Column(name = "semester")
     private int semester;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "subject", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Application> applications;
 
 

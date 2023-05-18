@@ -10,11 +10,11 @@
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
         integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-  <title>Subject List</title>
+  <title>Thesis List</title>
 
   <style>
     body {
-      background-color: #4b3f3f;
+      background-color: #272f5e;
       color: #fff;
     }
     .btn-secondary {
@@ -39,10 +39,15 @@
 
 <body>
 
-<div class="container">
-  <h3>Subject List</h3>
-  <table class="table table-striped">
-    <thead>
+<!-- Main content -->
+<div class="container my-4">
+
+  <!-- Subject list heading -->
+  <h1 class="text-center mb-5">Thesis List</h1>
+
+  <!-- Subject table -->
+  <table class="table table-striped table-hover">
+    <thead class="thead-dark">
     <tr>
       <th>Thesis Name</th>
       <th>Student Name</th>
@@ -50,6 +55,7 @@
       <th>Report Grade</th>
       <th>Presentation Grade</th>
       <th>Total Grade</th>
+      <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -70,11 +76,25 @@
     </tr>
     </tbody>
   </table>
+
+  <!-- Professor dashboard button -->
   <div>
-    <a href="/professor/dashboard" class="btn btn-secondary float-right mb-3"  role="button">Professor Dashboard</a>
+    <a href="/professor/dashboard" class="btn btn-secondary float-right mb-3"  role="button" style="background-color: green;">Professor Dashboard</a>
   </div>
   <span th:utext="${SuccessMessage}"></span>
+
 </div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.1/dist/umd/popper.min.js"
+        integrity="sha256-0JZBd/lwQ+SErbB0g0j3zAajJ6vKj6lXU6UI3ti6L/8="
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6IXQdebFze12+XpLkymx4lw6HDoczx6Vr4LHXa0qDlYfW2aYI0+Evc"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>

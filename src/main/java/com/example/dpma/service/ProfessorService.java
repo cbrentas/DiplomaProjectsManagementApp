@@ -26,5 +26,5 @@ public interface ProfessorService {
 
     public void assignSubjectToParticular(Professor professor, Integer subjectId, Integer studentId);
 
-
+    //public void deleteSubject(Professor professor,Integer subjectId);
 }

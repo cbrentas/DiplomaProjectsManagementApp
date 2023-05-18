@@ -61,6 +61,11 @@ public class ProfessorController {
 
     @RequestMapping("/professor/save")
     public String studentSave(@ModelAttribute("professor") Professor professor, Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentPrincipalName = authentication.getName();
+        System.err.println(currentPrincipalName);
+        model.addAttribute("username", currentPrincipalName);
+        model.addAttribute("role", "PROFESSOR");
         professorService.saveProfile(professor);
         return "professor/dashboard";
     }
@@ -89,6 +94,8 @@ public class ProfessorController {
         subjectService.saveSubject(subject);
         professorService.saveSubject(professor, subject);
         model.addAttribute("successMessage", "Subject registered successfully!");
+        model.addAttribute("username", currentPrincipalName);
+        model.addAttribute("role", "PROFESSOR");
 
 
         return "/professor/dashboard";
@@ -115,6 +122,7 @@ public class ProfessorController {
         Professor professor = professorService.findProfessorByUserId(user.getId());
         model.addAttribute("applications", professorService.listApplications(subjectId, professor));
         model.addAttribute("subjectId",subjectId);
+        model.addAttribute("subject", subjectService.findById(subjectId));
         return "/professor/applicationsList";
 
     }
@@ -206,7 +214,6 @@ public class ProfessorController {
         return "professor/thesisList";
     }
 }
-
 
 
 

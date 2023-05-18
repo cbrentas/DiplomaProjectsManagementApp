@@ -18,7 +18,7 @@ public class ApplicationServiceImpl implements ApplicationService{
     public boolean isApplicationPresent(Integer student_id, Integer subject_id) {
 
         Optional<Application> storedApplication = applicationDAO.findApplicationByStudentIdAndSubjectId(student_id, subject_id);
-        
+
         return storedApplication.isPresent();
     }
 }

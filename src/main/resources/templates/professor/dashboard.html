@@ -12,7 +12,7 @@
     <!-- Custom CSS -->
     <style>
         body {
-            background-color: #4b3f3f;
+            background-color: #272f5e;
             color: #fff;
         }
         /* Header Styles */
@@ -41,6 +41,10 @@
             background-color: #6a27ab;
             color: white;
         }
+        .btn-custom-control {
+            background-color: #ec6d0d;
+            color: white;
+        }
 
         .btn-custom:hover {
             background-color: #744f15;
@@ -50,6 +54,11 @@
 
         .btn-custom-alt:hover {
             background-color: #8b3fc3;
+            color: white;
+            transform: translateY(-3px);
+        }
+        .btn-custom-control:hover {
+            background-color: #ab6506;
             color: white;
             transform: translateY(-3px);
         }
@@ -120,17 +129,19 @@
     </div>
 
     <div class="row mb-4">
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-4">
             <a th:href="@{/professor/showSubjectForm}" class="btn btn-custom btn-block">Add Subject</a>
         </div>
-        <div class="col-sm-12 col-md-6">
+        <div class="col-sm-12 col-md-4">
             <a th:href="@{/professor/subjectsList}" class="btn btn-custom-alt btn-block">Subject List</a>
         </div>
-        <div class="col-sm-12 col-md-6">
-            <a th:href="@{/professor/thesisList}" class="btn btn-custom-alt btn-block">Thesis List</a>
+        <div class="col-sm-12 col-md-4">
+            <a th:href="@{/professor/thesisList}" class="btn btn-custom-control btn-block">Thesis List</a>
         </div>
 
     </div>
+    <span th:utext="${applied}"></span>
+
 
 
 </div>

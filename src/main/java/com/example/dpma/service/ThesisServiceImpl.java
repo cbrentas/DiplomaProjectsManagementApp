@@ -33,7 +33,7 @@ public class ThesisServiceImpl implements ThesisService{
 
     @Override
     public void setThesisGrade(Thesis thesis){
-        thesis.setGrade_total(0.7*thesis.getGrade_impl() + 0.15*thesis.getGrade_rep()+0.15*thesis.getGrade_rep());
+        thesis.setGrade_total(0.7*thesis.getGrade_impl() + 0.15*thesis.getGrade_rep()+0.15*thesis.getGrade_pres());
         thesisDAO.save(thesis);
 
     }
